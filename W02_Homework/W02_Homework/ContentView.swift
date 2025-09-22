@@ -8,45 +8,59 @@
 import SwiftUI
 
 struct ContentView: View {
+    struct ToDoItem: Identifiable{
+        let id: Int
+        var title: String
+        var isDone: Bool
+    }
     
-    @State private var isOn: Bool = false
-    var toDoList = ["Cuci piring", "Makan nasi", "Beli makanan"]
+   
+    @State private var toDoList: [ToDoItem] = [ToDoItem(id: 1, title: "Cuci Piring", isDone:false), ToDoItem(id: 2, title: "Makan Nasi", isDone: true), ToDoItem(id: 3, title: "Beli Makanan", isDone: false)]
     @State private var toDo: String = ""
-    
-//    private func addToDo(_ title: String, action: @escaping () -> Void) -> some View {
-//        
-//    }
     
     var body: some View {
         VStack {
-            Text("To Do List").font(.title)
-        }
-        
-        List(toDoList, id: \.self){
-            todo in
-            HStack{
-                Text(todo)
-                Spacer()
-                VStack{
-                    Toggle("", isOn: $isOn).padding()
+            Text("My To Do List 🍀")
+                .font(.largeTitle.bold())
+                .foregroundColor(.green)
+                .padding(.top)
+            
+            List{
+                ForEach($toDoList) { $list in
+                    HStack{
+                        Text(list.title)
+                            .font(.headline)
+                            .foregroundColor(list.isDone ? .gray.opacity(0.7) : .green)
+                            .strikethrough(list.isDone, color: .gray)
+                        Spacer()
+                        Toggle("", isOn: $list.isDone).padding()
+                    }.padding(10)
+                        .background(RoundedRectangle(cornerRadius: 10).fill(Color(.green).opacity(0.2)))
                 }
             }
         }
-        VStack {
+        
+        VStack{
             TextField("What do you want to do?", text: $toDo)
                 .textFieldStyle(.roundedBorder)
                 .padding()
+                      
+            Button(action:{
+                guard !toDo.isEmpty else { return }
+
+                toDoList.append(ToDoItem(id: toDoList.count+1,title: toDo, isDone: false))
+                toDo = ""}){
+                    Text("Insert").font(.headline.bold())
+                        .foregroundStyle(.green)
             
-            Button("Tekan Saya"){
-                print("Saya tertekan :(")
-                toDoList.append(toDo)
             }.padding(.horizontal, 20)
                 .padding(.vertical, 10)
-                .background(.pink)
+                .background(.white)
                 .cornerRadius(10)
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke(.purple,lineWidth: 2)).foregroundStyle(.white)
-        }
-        
+                .overlay(RoundedRectangle(cornerRadius: 10)
+                    .stroke(.blue,lineWidth: 2).opacity(0.5))
+                .foregroundStyle(.white)
+        }.background(Color(.green))
     }
 }
 
