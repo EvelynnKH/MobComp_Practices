@@ -15,7 +15,7 @@ struct ContentView: View {
     }
     
    
-    @State private var toDoList: [ToDoItem] = [ToDoItem(id: 1, title: "Cuci Piring", isDone:false), ToDoItem(id: 2, title: "Makan Nasi", isDone: true), ToDoItem(id: 3, title: "Beli Makanan", isDone: false)]
+    @State private var toDoList: [ToDoItem] = [ToDoItem(id: 1, title: "Cuci Piring", isDone:false), ToDoItem(id: 2, title: "Makan Nasi", isDone: true), ToDoItem(id: 3, title: "Beli Makanan", isDone: false), ToDoItem(id: 4, title: "Baca Novel", isDone:true), ToDoItem(id: 5, title: "Dengerin Lagu", isDone:false)]
     @State private var toDo: String = ""
     
     var body: some View {
