@@ -36,7 +36,7 @@ struct MovieCard: View{
                             }
                             .frame(width: 350, alignment: .leading)
                             .padding()
-                            .background(Color(hex: "#47a0ff").opacity(0.2))
+                            .background(Color(hex: "47a0ff").opacity(0.2))
                             .cornerRadius(8)
                             .padding(.horizontal)
                         }
